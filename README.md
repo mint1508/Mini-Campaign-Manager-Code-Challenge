@@ -10,15 +10,35 @@ A full-stack Mini Campaign Manager — a simplified MarTech tool that lets marke
 
 ## Architecture
 
-```
-Frontend (React + Vite)          Backend (Express)           PostgreSQL
-┌─────────────────────┐    ┌──────────────────────────┐    ┌──────────┐
-│ Redux Toolkit (auth) │    │ Routes → Controllers     │    │ users    │
-│ React Query (data)   │───▶│ → Services → Repositories│───▶│ campaigns│
-│ Tailwind CSS (UI)    │    │                          │    │ recipients│
-└─────────────────────┘    │ JWT │ Zod │ Helmet │ CORS │    │ campaign_│
-                           └──────────────────────────┘    │ recipients│
-                                                           └──────────┘
+```mermaid
+graph LR
+    subgraph Frontend ["Frontend (React + Vite)"]
+        RTK[Redux Toolkit - auth]
+        RQ[React Query - data]
+        TW[Tailwind CSS - UI]
+    end
+
+    subgraph Backend ["Backend (Express)"]
+        direction TB
+        Flow[Routes → Controllers → Services → Repositories]
+        
+        subgraph Middleware
+            JWT[JWT]
+            Zod[Zod]
+            Helmet[Helmet]
+            CORS[CORS]
+        end
+    end
+
+    subgraph Database ["PostgreSQL"]
+        U[(users)]
+        C[(campaigns)]
+        R[(recipients)]
+        CR[(campaign_recipients)]
+    end
+
+    Frontend --> Backend
+    Backend --> Database
 ```
 
 ## Quick Start
