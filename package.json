@@ -1,0 +1,13 @@
+{
+  "name": "mini-campaign",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "backend:dev": "yarn workspace @mini-campaign/backend dev",
+    "backend:test": "yarn workspace @mini-campaign/backend test",
+    "backend:migrate": "yarn workspace @mini-campaign/backend migrate",
+    "frontend:dev": "yarn workspace @mini-campaign/frontend dev"
+  }
+}
